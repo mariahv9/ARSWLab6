@@ -4,7 +4,8 @@
 
 ### Descripción y objetivos
 
-![img]()
+![img](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/image.png)
+
 Se desea generar una pequeña interfaz de administrador para el sistema de gestión de compra/reserva de boletos de cine. Para efectos prácticos del ejercicio se creará un espacio en la misma pantalla destinado para esto, tal y como se ve en el mock provisto.
 1. Agregue el campo de entrada para editar el horario de la función y el botón 'Save/Update'. Respetando la arquitectura de módulos actual del cliente, haga que al oprimirse el botón:
 * Se haga PUT al API, con la función actualizada, en su recurso REST correspondiente.
