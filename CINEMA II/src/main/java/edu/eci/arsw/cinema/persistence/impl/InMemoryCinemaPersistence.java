@@ -37,16 +37,17 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
     }    
 
     @Override
-    public void buyTicket(int row, int col, String cinema, String date, String movieName) throws CinemaException {
+    public void buyTicket(Seat seat, String cinema, String date, String movieName) throws CinemaException {
+
         Cinema c = getCinema(cinema);
         if(c!=null) {
             boolean notfounded = true;
             for (int i=0;i<c.getFunctions().size() && notfounded ;i++) {
 
                 if (c.getFunctions().get(i).getMovie().getName().equals(movieName)
-                        && c.getFunctions().get(i).getDate().equals(date)) {
+                        && c.getFunctions().get(i).getDate().contains(date)) {
 
-                    c.getFunctions().get(i).buyTicket(row,col);
+                    c.getFunctions().get(i).buyTicket(seat);
                     notfounded = false;
                 }
             }
@@ -84,7 +85,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
 
             for (CinemaFunction function : c.getFunctions()) {
 
-                if (function.getDate().equals(date) && function.getMovie().getName().equals(movie)) {
+                if (function.getDate().contains(date) && function.getMovie().getName().equals(movie)) {
                     listc.add(function);
                 }
             }
@@ -135,11 +136,24 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
     @Override
     public void setFunction(String cinema, CinemaFunction cinemaFunction) throws CinemaException {
         Cinema cine = getCinema(cinema);
-        if (cinemaFunction != null){
+        if (cine!= null && cinemaFunction != null){
+
             cine.setFunctions(cinemaFunction);
         }else {
             throw new CinemaException("Unexistent cinema");
         }
     }
+
+    @Override
+    public void deleteFunction(String cinema, String date, String movie) throws CinemaException {
+        Cinema cine = getCinema(cinema);
+        if (cine!= null){
+            cine.deleteFunctions(date,movie);
+
+        }else {
+            throw new CinemaException("Unexistent cinema");
+        }
+    }
+
 
 }

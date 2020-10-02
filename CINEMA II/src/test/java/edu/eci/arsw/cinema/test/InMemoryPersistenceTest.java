@@ -29,11 +29,11 @@ public class InMemoryPersistenceTest {
         } catch (CinemaPersistenceException e) {
             fail("Cinema persistence failed inserting the first cinema.");
         }
-
-        ipct.buyTicket(2, 2, "Movies Bogotá", "2018-12-18 15:30", "The Night 2");
+        Seat seat = new Seat(2,2);
+        ipct.buyTicket(seat, "Movies Bogotá", "2018-12-18 15:30", "The Night 2");
 
         try {
-            ipct.buyTicket(2, 2, "Movies Bogotá", "2018-12-18 15:30", "The Night 2");
+            ipct.buyTicket(seat, "Movies Bogotá", "2018-12-18 15:30", "The Night 2");
             assertEquals(0,1);
         } catch (CinemaException e){
             assertEquals(1,1);

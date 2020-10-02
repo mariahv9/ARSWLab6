@@ -9,8 +9,7 @@ import java.util.*;
 public interface CinemaPersitence {
     
     /**
-     * @param row the row of the seat
-     * @param col the column of the seat
+     * @param seat the function's seat
      * @param cinema the cinema's name
      * @param date the date of the function
      * @param movieName the name of the movie
@@ -18,7 +17,7 @@ public interface CinemaPersitence {
      * @throws CinemaException if the seat is occupied,
      *    or any other low-level persistence error occurs.
      */
-    public void buyTicket(int row, int col, String cinema, String date, String movieName) throws CinemaException;
+    public void buyTicket(Seat seat, String cinema, String date, String movieName) throws CinemaException;
     
     /**
      * 
@@ -61,4 +60,6 @@ public interface CinemaPersitence {
     public void addFunction(String cinema, CinemaFunction cinemaFunction) throws CinemaException;
 
     public void setFunction (String cinema, CinemaFunction cinemaFunction) throws CinemaException;
+
+    public void deleteFunction (String cinema, String date, String movie) throws CinemaException;
 }

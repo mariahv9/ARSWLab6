@@ -12,7 +12,7 @@ public interface CinemaServicesInterface {
 
     public Cinema getCinemaByName(String name)throws CinemaException;
 
-    public void buyTicket(int row, int col, String cinema, String date, String movieName);
+    public void buyTicket(Seat seat, String cinema, String date, String movieName) throws CinemaException;
 
     public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) throws CinemaException;
 
@@ -25,4 +25,7 @@ public interface CinemaServicesInterface {
     public void addFunction(String cinema, CinemaFunction cinemaFunction) throws CinemaException;
 
     void setFunction(String cinema, CinemaFunction cinemaFunction) throws CinemaException;
+
+    void delFunction(String cinema, String date, String movie) throws CinemaException;
+
 }

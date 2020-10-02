@@ -67,18 +67,13 @@ public class CinemaServices implements CinemaServicesInterface{
     }
 
     /**
-     * @param row row of the seats
-     * @param col col of the seats
+     * @param seat function's seat
      * @param cinema cinema's name
      * @param date movie's date
      * @param movieName movie's name
      */
-    public void buyTicket(int row, int col, String cinema, String date, String movieName){
-        try {
-            cps.buyTicket(row, col, cinema, date, movieName);
-        }catch (CinemaException ce){
-            System.out.println(ce.toString());
-        }
+    public void buyTicket(Seat seat, String cinema, String date, String movieName) throws CinemaException{
+        cps.buyTicket(seat, cinema, date, movieName);
     }
 
     /**
@@ -143,5 +138,11 @@ public class CinemaServices implements CinemaServicesInterface{
     @Override
     public void setFunction(String cinema, CinemaFunction cinemaFunction) throws CinemaException {
         cps.setFunction(cinema, cinemaFunction);
+    }
+
+    @Override
+    public void delFunction(String cinema, String date, String movie) throws CinemaException {
+        cps.deleteFunction(cinema, date, movie);
+
     }
 }

@@ -89,4 +89,26 @@ public class CinemaAPIController {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(value = "/{cinemaName}/{date}/{movieName}",method = RequestMethod.DELETE)
+    public ResponseEntity<?> delFunction(@PathVariable String cinemaName,@PathVariable String date,@PathVariable String movieName){
+        try {
+            cinemaServices.delFunction(cinemaName, date, movieName);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (CinemaException ex) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error HTTP 404",HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/{cinemaName}/{date}/{movieName}",method = RequestMethod.PUT)
+    public ResponseEntity<?> Buyticket(@PathVariable String cinemaName,@PathVariable String date,@PathVariable String movieName, @RequestBody Seat seat){
+        try {
+            cinemaServices.buyTicket(seat,cinemaName, date, movieName);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (CinemaException ex) {
+            Logger.getLogger(CinemaAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error HTTP 404",HttpStatus.NOT_FOUND);
+        }
+    }
 }

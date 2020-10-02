@@ -48,6 +48,49 @@
                 <h2 id="movieSelected" >Availability of Functions: </h2>
                 <canvas id="canvas" width="850" height="400" style="border:1px solid #000000;"></canvas>
             </div>
+            <div>
+                <h2 id="Administrator" >Administrator mode: </h2>
+                <label for="cinema"> Create new function: </label>
+                <p>
+                    <input type="text" id="newMovieName" name="newMovieName" placeholder="Movie Name">
+                    <input type="text" id="newMovieGenre" name="newMovieGenre" placeholder="Movie Genre">
+                </p>
+                <p>
+                    <input type="text" id="newDate" name="newDate" placeholder="Date">
+                    <input type="text" id="newHour" name="newHour" placeholder="Hour">
+                </p>
+                <p>
+                <button type="button" onclick="app.createFunction()" >Save</button>
+                </p>
+
+            </div>
+            <div class="grid-item">
+                <br><br><br>
+                <p>
+                    <label for="cinema"> Modify Actual hour: </label>
+                    <input type="text" id="hour" name="hour" placeholder="New Hour">
+                    <button type="button" onclick="app.putFunctionHour()" >Save/Update</button>
+                </p>
+                <p>
+                    <label for="cinema"> Delete Actual Function: </label>
+                    <button type="button" onclick="app.delFunction()" >Delete</button>
+                </p>
+<!--                <p>-->
+<!--                    <button type="button" onclick="app.getFunctionsByCinemaAndDate()" >Create new function</button>-->
+<!--                    <button type="button" onclick="app.getFunctionsByCinemaAndDate()" >Delete function</button>-->
+<!--                </p>-->
+            </div>
+            <div>
+                <h3>Comprar filas </h3>
+                <p>
+                    <label for="cinema"> Seat: </label>
+                    <input type="text" id="fila" name="fila" placeholder="Numero de Fila">
+                    <input type="text" id="columna" name="columna" placeholder="Numero de Columna">
+                </p>
+                <p>
+                    <button type="button" onclick="app.buyTicket()" >Save</button>
+                </p>>
+            </div>
         </div>
     </body>
 </html>

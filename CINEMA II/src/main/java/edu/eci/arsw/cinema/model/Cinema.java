@@ -31,11 +31,28 @@ public class Cinema {
     }
 
     public void setFunctions(CinemaFunction cinemaFunction) {
-        this.functions = functions;
+        for (int i=0;i<functions.size(); i++){
+            if(cinemaFunction.getMovie().getName().equals(functions.get(i).getMovie().getName())){
+                functions.get(i).setDate(cinemaFunction.getDate());
+            }
+        }
     }
+
 
     public void addFunctions(CinemaFunction cinemaFunction){
         functions.add(cinemaFunction);
+    }
+
+    public void deleteFunctions(String date, String movie){
+        int function = -1;
+        for (int i=0;i<functions.size(); i++){
+            if(movie.equals(functions.get(i).getMovie().getName()) && date.equals(functions.get(i).getDate())){
+                function=i;
+            }
+        }
+        if (function>-1){
+            functions.remove(function);
+        }
     }
 
     public void setSchedule(List<CinemaFunction> functions) {

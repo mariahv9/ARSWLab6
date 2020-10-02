@@ -1,7 +1,11 @@
 app = (function () {
     var cinema;
     var dateF;
-    var module = "js/apimock.js";
+    var movieName1;
+    var movieGen;
+    var movieHour;
+    var seats;
+    var module = "js/apiclient.js";
 
     function setCinemaName() {
         cinema = newCinema;
@@ -39,7 +43,7 @@ app = (function () {
         $("#movieSelected").text("Availability of Functions: ");
         if(mapFunctions!=null){
             mapFunctions.map(function (film) {
-                var onclick = "app.consultFunctionBySeats(\""+cinema+"\",\""+dateF+"\",\""+film.hour+"\",\""+film.movieName+"\")";
+                var onclick = "app.consultFunctionBySeats(\""+cinema+"\",\""+dateF+"\",\""+film.hour+"\",\""+film.movieName+"\",\""+film.gener+"\")";
                 var boton = "<input type='button' class='show' value='Consult seats' onclick='" + onclick + "'></input>";
                 var row = '<tr><td>' + film.movieName + '</td><td>' + film.gener + '</td><td>' + film.hour + '</td><td>' + boton + '</td></tr>';
                 $("#table").append(row);
@@ -47,8 +51,12 @@ app = (function () {
         }
     }
 
-    function  consultFunctionBySeats (nameOfCinema,dateF,hour,movieName) {
+    function  consultFunctionBySeats (nameOfCinema,dateF,hour,movieName,gener) {
         clearTable();
+        movieName1 = movieName;
+        movieGen = gener;
+        movieHour = hour
+
         var dateTarget = dateF.concat(" ",hour);
         $("#movieSelected").text("Availability of Functions: "+ movieName);
         $.getScript(module, function(){
@@ -64,7 +72,7 @@ app = (function () {
     }
 
     function drawSeats(functionToSeats) {
-        var seats = functionToSeats.seats;
+        seats = functionToSeats.seats;
         var c = document.getElementById("canvas");
         var count = c.getContext("2d");
         count.fillStyle = "deepskyblue";
@@ -85,10 +93,203 @@ app = (function () {
         }
     }
 
+    function putFunctionHour(){
+        var hour = $("#hour").val();
+
+        var func = {
+            "movie": {
+                    "name": movieName1,
+                    "genre": movieGen
+                    },
+            "seats": seats,
+            "date": dateF+" "+hour
+        };
+        var jsonfunc = JSON.stringify(func);
+
+        $.getScript(module, function(){
+            client.putFunctionHour(cinema,jsonfunc,resetValue);
+        });
+
+    }
+
+    function createFunction(){
+        dateF = $("#newDate").val();
+        var func = {
+            "movie": {
+                    "name": $("#newMovieName").val(),
+                    "genre": $("#newMovieGenre").val()
+                    },
+            "seats": [
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ],
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ],
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ],
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ],
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ],
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ],
+                      [
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true,
+                          true
+                      ]
+                 ],
+            "date": dateF +" "+$("#newHour").val()
+        };
+        var jsonfunc = JSON.stringify(func);
+        $.getScript(module, function(){
+            client.postFunction(cinema,jsonfunc,resetValue);
+        });
+    }
+
+    function delFunction(){
+        var func = {
+            "movie": {
+                    "name": movieName1,
+                    "genre": movieGen
+                    },
+            "seats": seats,
+            "date": dateF+" "+movieHour
+        };
+        var jsonfunc = JSON.stringify(func);
+        var dateTarget = dateF.concat(" ",movieHour);
+        $.getScript(module, function(){
+                client.deleteFunction(cinema,movieName1,dateTarget,resetValue);
+            });
+    }
+
+    function delFunction(){
+        var func = {
+            "movie": {
+                    "name": movieName1,
+                    "genre": movieGen
+                    },
+            "seats": seats,
+            "date": dateF+" "+movieHour
+        };
+        var jsonfunc = JSON.stringify(func);
+        var dateTarget = dateF.concat(" ",movieHour);
+        $.getScript(module, function(){
+                client.deleteFunction(cinema,movieName1,dateTarget,resetValue);
+            });
+    }
+
+    function buyTicket(){
+        var func = {
+            "row": $("#fila").val(),
+            "col": $("#columna").val()
+        };
+        var jsonfunc = JSON.stringify(func);
+        var dateTarget = dateF.concat(" ",movieHour);
+        $.getScript(module, function(){
+                client.buyTicket(cinema,movieName1,dateTarget,jsonfunc,resetValue);
+            });
+    }
+
+    function resetValue(){
+        $("#newMovieName").val( "" );
+        $("#newMovieGenre").val( "" );
+        $("#newDate").val( "" );
+        $("#newHour").val( "" );
+        $("#hour").val( "" );
+        $("#dateF").val(dateF);
+        getFunctionsByCinemaAndDate()
+        clearTable()
+    }
+
     return {
         setCinemaName: setCinemaName,
         setDate: setDate,
         getFunctionsByCinemaAndDate: getFunctionsByCinemaAndDate,
-        consultFunctionBySeats : consultFunctionBySeats
+        consultFunctionBySeats : consultFunctionBySeats,
+        putFunctionHour: putFunctionHour,
+        createFunction: createFunction,
+        delFunction: delFunction,
+        buyTicket: buyTicket
     }
 })();
