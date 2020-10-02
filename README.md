@@ -41,6 +41,28 @@ Esta opción debe cambiar la manera como funciona la opción 'save/update', pues
 * Haga DELETE de la función actualmente seleccionada.
 * Haga GET de las funciones ahora disponibles.
 
+## Funcionalidad
+
+### Diseño Front Final
+
+![front](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/front1.png)
+
+### Cambiar hora función
+
+![hora](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/hour.png)
+
+![hora1](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/hour1.png)
+
+### Agregar una función
+
+![funcion](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/newFunction.png)
+![funcion1](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/newFunction2.png)
+
+### Comprar tiquete
+
+![tiquete](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/buyTicket.png)
+![tiquete1](https://github.com/mariahv9/ARSWLab6/blob/master/CINEMA%20II/img/buyTicket1.png)
+
 ## Construido con 
 
 * [Java 8](https://www.java.com/es/about/whatis_java.jsp)
